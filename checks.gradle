@@ -1,0 +1,94 @@
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+def remoteFile(def name, def fileType){
+    mkdir "${project.rootDir}/"+ fileType +"/"
+    def f = new File("${project.rootDir}/"+ fileType +"/" +  name)
+    if (!f.exists()) {
+        new URL("https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/" + fileType +"/" + name).withInputStream{ i -> f.withOutputStream{ it << i }}
+    }
+    return f
+}
+
+def remoteConfigFile(def name){
+    return remoteFile(name, "config")
+}
+
+android{
+  lintOptions {
+        abortOnError false
+        ignoreWarnings false
+        xmlReport false
+        htmlReport true
+        lintConfig remoteConfigFile("lint.xml")
+        htmlOutput file("$project.buildDir/reports/lint/lint-result.html")
+        xmlOutput file("$project.buildDir/reports/lint/lint-result.xml")
+    }
+}
+
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
+
+task checkstyle(type: Checkstyle) {
+    ignoreFailures = true
+
+    configFile remoteConfigFile("checkstyle.xml")
+    configProperties.checkstyleSuppressionsPath = remoteConfigFile("checkstyle-suppression.xml")
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+    classpath = files()
+}
+
+task findbugs(type: FindBugs, dependsOn: "assembleDebug") {
+    ignoreFailures = true
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = remoteConfigFile("findbugs-filter.xml")
+    classes = files("build/intermediates/classes")
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$project.buildDir/reports/findbugs/findbugs.xml"
+        }
+        html {
+            destination "$project.buildDir/reports/findbugs/findbugs.html"
+        }
+    }
+
+    classpath = files()
+}
+
+
+task pmd(type: Pmd) {
+    ignoreFailures = true
+    ruleSetFiles = files(remoteConfigFile("pmd.xml"))
+    ruleSets = []
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$project.buildDir/reports/pmd/pmd.xml"
+        }
+        html {
+            destination "$project.buildDir/reports/pmd/pmd.html"
+        }
+    }
+}
+
+task ideCodeStyle << {
+    remoteFile("codeStyleSettings.xml",".idea")
+}
+
+preBuild.dependsOn ideCodeStyle
