@@ -16,8 +16,8 @@ def remoteConfigFile(def name){
 }
 
 android{
-  lintOptions {
-        abortOnError false
+    lintOptions {
+        abortOnError true
         ignoreWarnings false
         xmlReport false
         htmlReport true
@@ -30,7 +30,7 @@ android{
 check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 
 task checkstyle(type: Checkstyle) {
-    ignoreFailures = true
+    ignoreFailures = false
 
     configFile remoteConfigFile("checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = remoteConfigFile("checkstyle-suppression.xml")
@@ -41,7 +41,7 @@ task checkstyle(type: Checkstyle) {
 }
 
 task findbugs(type: FindBugs, dependsOn: "assembleDebug") {
-    ignoreFailures = true
+    ignoreFailures = false
     effort = "max"
     reportLevel = "high"
     excludeFilter = remoteConfigFile("findbugs-filter.xml")
@@ -67,7 +67,7 @@ task findbugs(type: FindBugs, dependsOn: "assembleDebug") {
 
 
 task pmd(type: Pmd) {
-    ignoreFailures = true
+    ignoreFailures = false
     ruleSetFiles = files(remoteConfigFile("pmd.xml"))
     ruleSets = []
 
