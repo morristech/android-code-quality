@@ -2,20 +2,24 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-def remoteFile(def name, def fileType){
-    mkdir "${project.rootDir}/"+ fileType +"/"
-    def f = new File("${project.rootDir}/"+ fileType +"/" +  name)
+def remoteFile(def name, def fileType) {
+    mkdir "${project.rootDir}/" + fileType + "/"
+    def f = new File("${project.rootDir}/" + fileType + "/" + name)
     if (!f.exists()) {
-        new URL("https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/" + fileType +"/" + name).withInputStream{ i -> f.withOutputStream{ it << i }}
+        new URL("https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/" + fileType + "/" + name).withInputStream { i ->
+            f.withOutputStream {
+                it << i
+            }
+        }
     }
     return f
 }
 
-def remoteConfigFile(def name){
+def remoteConfigFile(def name) {
     return remoteFile(name, "config")
 }
 
-android{
+android {
     lintOptions {
         abortOnError true
         ignoreWarnings false
@@ -88,7 +92,13 @@ task pmd(type: Pmd) {
 }
 
 task ideCodeStyle << {
-    remoteFile("codeStyleSettings.xml",".idea")
+    remoteFile("codeStyleSettings.xml", ".idea")
+}
+
+task cleanChecks << {
+    delete(file("${project.rootDir}/config"))
+    delete(file("${project.rootDir}/.idea/codeStyleSettings.xml"))
 }
 
 preBuild.dependsOn ideCodeStyle
+clean.dependsOn cleanChecks
