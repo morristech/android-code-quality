@@ -96,8 +96,9 @@ task ideCodeStyle << {
 }
 
 task cleanChecks << {
-    delete(file("${project.rootDir}/config"))
-    delete(file("${project.rootDir}/.idea/codeStyleSettings.xml"))
+    // TODO: it's not properly recreating after clean, check it out better.
+    // delete(file("${project.rootDir}/config"))
+    // delete(file("${project.rootDir}/.idea/codeStyleSettings.xml"))
 }
 
 preBuild.dependsOn ideCodeStyle
