@@ -19,10 +19,14 @@ def remoteConfigFile(def name) {
     return remoteFile(name, "config")
 }
 
+pmd {
+    toolVersion = '5.5.2'
+}
+
 android {
     lintOptions {
         abortOnError true
-        ignoreWarnings false
+        ignoreWarnings true
         xmlReport false
         htmlReport true
         lintConfig remoteConfigFile("lint.xml")
@@ -38,7 +42,7 @@ task checkstyle(type: Checkstyle) {
 
     configFile remoteConfigFile("checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = remoteConfigFile("checkstyle-suppression.xml")
-    source 'src'
+    source 'src/main'
     include '**/*.java'
     exclude '**/gen/**'
     classpath = files()
@@ -75,12 +79,12 @@ task pmd(type: Pmd) {
     ruleSetFiles = files(remoteConfigFile("pmd.xml"))
     ruleSets = []
 
-    source 'src'
+    source 'src/main'
     include '**/*.java'
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = false
+        xml.enabled = true
         html.enabled = true
         xml {
             destination "$project.buildDir/reports/pmd/pmd.xml"
@@ -96,9 +100,8 @@ task ideCodeStyle << {
 }
 
 task cleanChecks << {
-    // TODO: it's not properly recreating after clean, check it out better.
-    // delete(file("${project.rootDir}/config"))
-    // delete(file("${project.rootDir}/.idea/codeStyleSettings.xml"))
+    //delete(file("${project.rootDir}/config"))
+    //delete(file("${project.rootDir}/.idea/codeStyleSettings.xml"))
 }
 
 preBuild.dependsOn ideCodeStyle
