@@ -23,6 +23,7 @@
         <!-- using ModifiedCyclomaticComplexity and disabling two other duplicate rules-->
         <exclude name="CyclomaticComplexity"/>
         <exclude name="StdCyclomaticComplexity"/>
+        <exclude name="TooManyFields"/>
     </rule>
     <rule message="Avoid methods longer than 200 lines"
           ref="rulesets/java/codesize.xml/ExcessiveMethodLength">
