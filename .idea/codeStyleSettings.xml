@@ -70,6 +70,7 @@
           <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
           <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
           <option name="BLANK_LINES_AROUND_CLASS" value="0" />
+          <option name="SPACE_WITHIN_BRACES" value="true" />
           <option name="KEEP_SIMPLE_CLASSES_IN_ONE_LINE" value="true" />
           <option name="METHOD_ANNOTATION_WRAP" value="1" />
           <option name="CLASS_ANNOTATION_WRAP" value="1" />
