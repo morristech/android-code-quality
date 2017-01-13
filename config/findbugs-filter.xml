@@ -15,4 +15,7 @@
 		<Class name="~.*\.ui\..+$"/>
 		<Bug code="BC"/>
 	</Match>
+	<Match>
+		<Bug pattern="DM_DEFAULT_ENCODING" />
+	</Match>
 </FindBugsFilter>
