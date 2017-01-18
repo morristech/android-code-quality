@@ -5,9 +5,6 @@
 This, as a repo, is a live document of the standard code checks to apply on Sensorberg Android projects.
 A lot of the configs presented on the initial commit are just defaults from the analysis tools and will be changed as developers discuss which ones should be kept and which ones should go. This idea for this repo is slightly inspired from [this blog post](http://continuousdev.com/2015/08/checkstyle-vs-pmd-vs-findbugs/).
 
-> maintain an exclusion list and add to it new violations after accepting them by senior staff.
-
-
 ## Implementation
 
 Made to be as easy as possible. On the module `build.gradle` add the following line after android plugin
