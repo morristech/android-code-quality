@@ -82,7 +82,9 @@
         <exclude name="GuardLogStatementJavaUtil"/>
     </rule>
 
-    <rule ref="rulesets/java/migrating.xml"/>
+    <rule ref="rulesets/java/migrating.xml">
+        <exclude name="JUnit4TestShouldUseTestAnnotation"/>
+    </rule>
 
     <rule ref="rulesets/java/optimizations.xml">
         <exclude name="AvoidInstantiatingObjectsInLoops"/>
@@ -103,6 +105,7 @@
 
     <rule ref="rulesets/java/typeresolution.xml">
         <exclude name="LooseCoupling"/>
+        <exclude name="SignatureDeclareThrowsException"/>
     </rule>
 
     <rule ref="rulesets/java/unnecessary.xml">
