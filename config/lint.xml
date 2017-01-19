@@ -5,5 +5,6 @@
     <issue id="InvalidPackage" severity="error">
         <ignore regexp="okio.*jar" />
         <ignore regexp="retrofit.*jar" />
+        <ignore regexp="*javax.inject.*" />
     </issue>
 </lint>
