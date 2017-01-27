@@ -45,15 +45,11 @@
         <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
         <module name="AvoidNestedBlocks"/>
-        <!--<module name="EmptyBlock" />-->
         <module name="LeftCurly"/>
-        <!-- <module name="NeedBraces" /> -->
         <module name="RightCurly"/>
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <!-- <module name="HiddenField"/> -->
         <module name="IllegalInstantiation"/>
-        <module name="InnerAssignment"/>
         <module name="RedundantThrows">
             <property name="suppressLoadErrors" value="true"/>
         </module>
