@@ -6,6 +6,6 @@
         <ignore regexp="okio.*jar" />
         <ignore regexp="retrofit.*jar" />
         <ignore regexp="auto-value.*jar" />
-	    <ignore regexp="javapoet.*jar" />
+        <ignore regexp="javapoet.*jar" />
     </issue>
 </lint>
