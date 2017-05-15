@@ -34,9 +34,6 @@
         <AndroidXmlCodeStyleSettings>
           <option name="USE_CUSTOM_SETTINGS" value="true" />
         </AndroidXmlCodeStyleSettings>
-        <JSON>
-          <option name="ARRAY_WRAPPING" value="0" />
-        </JSON>
         <Objective-C-extensions>
           <file>
             <option name="com.jetbrains.cidr.lang.util.OCDeclarationKind" value="Import" />
@@ -79,20 +76,11 @@
           <option name="METHOD_ANNOTATION_WRAP" value="1" />
           <option name="CLASS_ANNOTATION_WRAP" value="1" />
           <option name="FIELD_ANNOTATION_WRAP" value="0" />
-          <indentOptions>
-            <option name="USE_TAB_CHARACTER" value="true" />
-          </indentOptions>
-        </codeStyleSettings>
-        <codeStyleSettings language="JSON">
-          <indentOptions>
-            <option name="USE_TAB_CHARACTER" value="true" />
-          </indentOptions>
         </codeStyleSettings>
         <codeStyleSettings language="XML">
           <option name="FORCE_REARRANGE_MODE" value="1" />
           <indentOptions>
             <option name="CONTINUATION_INDENT_SIZE" value="4" />
-            <option name="USE_TAB_CHARACTER" value="true" />
           </indentOptions>
           <arrangement>
             <rules>
