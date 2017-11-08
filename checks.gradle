@@ -24,7 +24,7 @@ pmd {
 }
 
 checkstyle {
-	toolVersion "7.6.1"
+	toolVersion "8.4"
 }
 
 android {
