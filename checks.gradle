@@ -39,10 +39,10 @@ android {
     }
 }
 
-check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
+check.dependsOn /*'checkstyle',*/ 'findbugs', 'pmd', 'lint'
 
 task checkstyle(type: Checkstyle) {
-    ignoreFailures = true
+    ignoreFailures = false
 
     configFile remoteConfigFile("checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = remoteConfigFile("checkstyle-suppression.xml")
