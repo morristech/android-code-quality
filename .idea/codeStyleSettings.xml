@@ -37,6 +37,11 @@
         <JSON>
           <option name="ARRAY_WRAPPING" value="0" />
         </JSON>
+        <JetCodeStyleSettings>
+          <option name="CONTINUATION_INDENT_IN_PARAMETER_LISTS" value="false" />
+          <option name="CONTINUATION_INDENT_FOR_EXPRESSION_BODIES" value="false" />
+          <option name="CONTINUATION_INDENT_FOR_CHAINED_CALLS" value="false" />
+        </JetCodeStyleSettings>
         <Objective-C-extensions>
           <file>
             <option name="com.jetbrains.cidr.lang.util.OCDeclarationKind" value="Import" />
@@ -245,6 +250,20 @@
               </section>
             </rules>
           </arrangement>
+        </codeStyleSettings>
+        <codeStyleSettings language="kotlin">
+          <option name="KEEP_BLANK_LINES_IN_DECLARATIONS" value="1" />
+          <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
+          <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
+          <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
+          <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
+          <option name="ALIGN_MULTILINE_METHOD_BRACKETS" value="true" />
+          <option name="METHOD_ANNOTATION_WRAP" value="1" />
+          <option name="CLASS_ANNOTATION_WRAP" value="1" />
+          <option name="FIELD_ANNOTATION_WRAP" value="0" />
+          <indentOptions>
+            <option name="USE_TAB_CHARACTER" value="true" />
+          </indentOptions>
         </codeStyleSettings>
       </value>
     </option>
