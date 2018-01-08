@@ -5,7 +5,7 @@ allprojects {
                 username findProperty("BITBUCKET_USERNAME", "")
                 password findProperty("BITBUCKET_PASSWORD", "")
             }
-            url 'https://api.bitbucket.org/1.0/repositories/' + COMPANY + '/' + REPOSITORY_NAME + '/raw/releases/'
+            url 'https://api.bitbucket.org/1.0/repositories/' + findProperty("COMPANY", "FOO") + '/' + findProperty("REPOSITORY_NAME", "BAR") + '/raw/releases/'
         }
     }
 }

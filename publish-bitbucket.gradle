@@ -1,5 +1,4 @@
 apply plugin: 'maven'
-apply from: 'https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/common-def.gradle'
 
 repositories {
     maven { url "https://raw.github.com/synergian/wagon-git/releases" }

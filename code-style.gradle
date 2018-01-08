@@ -1,5 +1,3 @@
-apply from: 'https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/common-def.gradle'
-
 rootProject.beforeEvaluate {
     downloadToProjectRoot(
             // source
