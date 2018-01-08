@@ -12,6 +12,8 @@ def findQuotedProperty(String key, String defaultValue) {
 
 def findProperty(String key, String defaultValue) {
 
+    logger.info("Finding property '" + key + "'")
+
     // CI injected
     if (System.getenv().containsKey(key)) {
         return System.getenv(key)
@@ -50,6 +52,9 @@ def gitSha1() {
 }
 
 def download(String from, String to) {
+
+    logger.info("Dowloading from '" + from + "' to '" + to + "'")
+
     def f = new File(to)
     new URL(from).withInputStream { i ->
         f.withOutputStream {
