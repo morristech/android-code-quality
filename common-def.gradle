@@ -72,7 +72,7 @@ def downloadToProjectRoot(String from, String subfolder, String filename) {
         to = "${project.rootDir}/${filename}"
     }
 
-    logger.info("Dowloading from '" + from + "' to '" + to + "'")
+    println "Dowloading from '" + from + "' to '" + to + "'"
 
     def f = new File(to)
     new URL(from).withInputStream { i ->
