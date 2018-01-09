@@ -8,9 +8,6 @@ class DownloadCodeStyle implements TaskExecutionListener {
 
     @Override
     void afterExecute(Task task, TaskState state) {
-
-        println "Executing .... >>> " + task.name
-
         if (task.name.equals("preBuild")) {
             task.project.rootProject.ext.
                     downloadToProjectRoot(
