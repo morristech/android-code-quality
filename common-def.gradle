@@ -1,93 +1,27 @@
-def wrapInQuotes(String wrapMe) {
-    return "\"" + wrapMe + "\""
-}
+apply from: 'https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/common-def.gradle'
 
-def findQuotedProperty(String key, String defaultValue) {
-    def val = findProperty(key, defaultValue)
-    if (val != defaultValue) {
-        val = wrapInQuotes(val)
-    }
-    return val
-}
+class DownloadCodeStyle implements TaskExecutionListener {
 
-def findProperty(String key, String defaultValue) {
-
-    logger.info("Finding property '" + key + "'")
-
-    // CI injected
-    if (System.getenv().containsKey(key)) {
-        return System.getenv(key)
+    @Override
+    void beforeExecute(Task task) {
     }
 
-    // local.properties file (dev-environment)
-    def propsFile = rootProject.file('local.properties')
-    if (propsFile.exists()) {
-        def props = new Properties()
-        props.load(propsFile.newDataInputStream())
-        if (props[key] != null) {
-            return props[key]
-        }
-    }
+    @Override
+    void afterExecute(Task task, TaskState state) {
 
-    // gradle.properties file
-    if (hasProperty(key)) {
-        return getProperty(key)
-    }
+        println "Executing .... >>> " + task.name
 
-    // default
-    return defaultValue
-}
-
-def gitSha1() {
-    try {
-        final def stdout = new ByteArrayOutputStream()
-        exec {
-            commandLine 'git', 'rev-parse', '--short', 'HEAD'
-            standardOutput = stdout
-        }
-        return stdout.toString().trim()
-    } catch (Exception e) {
-        return "gitless"
-    }
-}
-
-def download(String from, String to) {
-
-    logger.info("Dowloading from '" + from + "' to '" + to + "'")
-
-    def f = new File(to)
-    new URL(from).withInputStream { i ->
-        f.withOutputStream {
-            it << i
+        if (task.name.equals("preBuild")) {
+            task.project.rootProject.ext.
+                    downloadToProjectRoot(
+                            // source
+                            "https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/.idea/codeStyleSettings.xml",
+                            // sub-folder
+                            ".idea",
+                            // file name
+                            "codeStyleSettings.xml")
         }
     }
 }
 
-def downloadToProjectRoot(String from, String subfolder, String filename) {
-    def to
-    if (subfolder != null) {
-        mkdir "${project.rootDir}/${subfolder}"
-        to = "${project.rootDir}/${subfolder}/${filename}"
-    } else {
-        to = "${project.rootDir}/${filename}"
-    }
-
-    logger.info("Dowloading from '" + from + "' to '" + to + "'")
-
-    def f = new File(to)
-    new URL(from).withInputStream { i ->
-        f.withOutputStream {
-            it << i
-        }
-    }
-}
-
-
-ext {
-    findProperty = this.&findProperty
-    findQuotedProperty = this.&findQuotedProperty
-    gitSha1 = this.&gitSha1
-    wrapInQuotes = this.&wrapInQuotes
-    download = this.&download
-    downloadToProjectRoot = this.&downloadToProjectRoot
-}
+gradle.addListener new DownloadCodeStyle()
