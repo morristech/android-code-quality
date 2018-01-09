@@ -1,9 +1,18 @@
-rootProject.beforeEvaluate {
-    downloadToProjectRoot(
-            // source
-            "https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/.idea/codeStyleSettings.xml",
-            // sub-folder
-            ".idea",
-            // file name
-            "codeStyleSettings.xml")
+apply from: 'https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/common-def.gradle'
+
+task downloadCodeStyle {
+    group 'build setup'
+    description 'Downloads code style file from remote'
+
+    doLast {
+        downloadToProjectRoot(
+                // source
+                "https://raw.githubusercontent.com/sensorberg-dev/android-code-quality/master/.idea/codeStyleSettings.xml",
+                // sub-folder
+                ".idea",
+                // file name
+                "codeStyleSettings.xml")
+    }
 }
+
+init.dependsOn downloadCodeStyle
